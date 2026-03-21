@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLACHT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f5f2e8;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 131, 120, 0.03) 2px,
+                    rgba(139, 131, 120, 0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 131, 120, 0.03) 2px,
+                    rgba(139, 131, 120, 0.03) 4px
+                );
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        /* Fondo decorativo sketch (placeholder para tu ilustración) */
+        .background-illustration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 20%;
+            z-index: 1;
+            opacity: 0.15;
+            background-image: url(''); /* AQUI VA TU ILUSTRACIÓN DE FONDO */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        /* Patrón de bordes decorativos tipo sketch */
+        .sketch-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid rgba(60, 60, 60, 0.2);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .sketch-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 1px solid rgba(60, 60, 60, 0.1);
+            transform: translate(3px, 3px);
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        /* Logo TLACHT - Placeholder para tu logo original */
+        .logo-container {
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #2a2a2a;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            /* Estilo sketch */
+            text-shadow: 
+                2px 2px 0px rgba(60, 60, 60, 0.1),
+                -1px -1px 0px rgba(255, 255, 255, 0.5);
+            font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+        }
+
+        /* Placeholder para imagen de logo */
+        .logo-image {
+            display: none; /* Cambia a block cuando tengas tu logo */
+            width: 200px;
+            height: auto;
+            filter: grayscale(100%) contrast(120%);
+        }
+
+        /* Área central con navegación */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Botones de navegación */
+        .nav-button {
+            position: absolute;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3d4f7c;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 15px 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            /* Efecto sketch */
+            text-shadow: 
+                1px 1px 0px rgba(61, 79, 124, 0.2),
+                -0.5px -0.5px 0px rgba(255, 255, 255, 0.8);
+            transform-origin: center;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.15);
+            color: #2a3a5c;
+            text-shadow: 
+                2px 2px 4px rgba(61, 79, 124, 0.3),
+                -1px -1px 2px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Posiciones específicas */
+        .btn-about {
+            top: 30%;
+            left: 15%;
+            transform: rotate(-5deg);
+        }
+
+        .btn-about:hover {
+            transform: rotate(-5deg) scale(1.15);
+        }
+
+        .btn-portfolio {
+            top: 35%;
+            left: 8%;
+            transform: rotate(-3deg);
+        }
+
+        .btn-portfolio:hover {
+            transform: rotate(-3deg) scale(1.15);
+        }
+
+        .btn-contacto {
+            bottom: 25%;
+            right: 15%;
+            transform: rotate(3deg);
+        }
+
+        .btn-contacto:hover {
+            transform: rotate(3deg) scale(1.15);
+        }
+
+        /* Decoración sketch adicional */
+        .sketch-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .sketch-line {
+            position: absolute;
+            background: rgba(60, 60, 60, 0.1);
+            height: 1px;
+            width: 100px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 2.5rem;
+            }
+
+            .nav-button {
+                font-size: 1.2rem;
+                padding: 10px 15px;
+            }
+
+            .btn-about {
+                left: 10%;
+                top: 25%;
+            }
+
+            .btn-portfolio {
+                left: 5%;
+                top: 35%;
+            }
+
+            .btn-contacto {
+                right: 10%;
+                bottom: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PLACEHOLDER: Ilustración de fondo -->
+    <!-- Reemplaza el background-image en el CSS o usa esta etiqueta img -->
+    <div class="background-illustration"> <img src="images/5.jpg"></div>
+
+    <!-- Borde decorativo sketch -->
+    <div class="sketch-border"></div>
+
+    <div class="container">
+        <!-- PLACEHOLDER: Logo -->
+        <!-- Opción 1: Texto actual -->
+        <div class="logo-container">
+            <h1 class="logo-text">TLACHT</h1>
+            <!-- Opción 2: Imagen de logo (descomenta y reemplaza src) -->
+            <!-- <img src="tu-logo-aqui.png" alt="TLACHT Logo" class="logo-image"> -->
+        </div>
+
+        <!-- Contenido principal con navegación -->
+        <div class="main-content">
+            <!-- Botón ABOUT -->
+            <a href="#about" class="nav-button btn-about">
+                ABOUT
+            </a>
+
+            <!-- Botón PORTFOLIO -->
+            <a href="#portfolio" class="nav-button btn-portfolio">
+                PORTFOLIO
+            </a>
+
+            <!-- Botón CONTACTO -->
+            <a href="#contacto" class="nav-button btn-contacto">
+                CONTACTO
+            </a>
+        </div>
+    </div>
+
+    <!-- Decoraciones sketch sutiles -->
+    <div class="sketch-decoration">
+        <div class="sketch-line" style="top: 15%; left: 5%; transform: rotate(25deg);"></div>
+        <div class="sketch-line" style="bottom: 20%; left: 8%; transform: rotate(-15deg); width: 60px;"></div>
+        <div class="sketch-line" style="top: 20%; right: 10%; transform: rotate(45deg); width: 80px;"></div>
+    </div>
+
+</body>
+</html>
